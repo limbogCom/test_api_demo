@@ -64,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
           body: isLoading ? CircularProgressIndicator() : ListView.builder(
               itemBuilder: (context, int index){
                 return ListTile(
-                  title: Text(productList[index].messageId),
+                  title: Text(productList[index].optionList[index]['descr'].toString()),
                   subtitle: Text(productList[index].counter.toString()),
                 );
               },
@@ -107,6 +107,7 @@ class Product {
   final int versionModule;
   final String operation;
   final String originalURI;
+  final List optionList;
 
   Product(
       {required this.httpStatusCode,
@@ -115,7 +116,8 @@ class Product {
         required this.versionAPI,
         required this.versionModule,
         required this.operation,
-        required this.originalURI});
+        required this.originalURI,
+        required this.optionList});
 
   factory Product.fromJson(Map<String, dynamic> parsedJson) {
     return Product(
@@ -125,7 +127,8 @@ class Product {
         versionAPI: parsedJson['versionAPI'],
         versionModule: parsedJson['versionModule'],
         operation: parsedJson['operation'],
-        originalURI: parsedJson['originalURI']);
+        originalURI: parsedJson['originalURI'],
+        optionList: parsedJson['optionList']);
 
   }
 }
